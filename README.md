@@ -67,3 +67,31 @@ If you'd rather use VSCode for exploring and editing this repository you can con
     ```
 
 5. Start a remote session via VSCode and select the name of the vagrant host
+
+## Airflow Architecture concepts
+
+_Adapted from [Airflow Docs](https://airflow.apache.org/docs/apache-airflow/stable/concepts/overview.html)_
+
+Airflow is a tool that lets you build and run **workflows** which are based on a **directed-acyclic-graph** which contain individual **tasks** which have dependencies and data flows.
+
+The **DAG** specifies all **task** dependencies, the order of tasks, and whether to attempt retries. The **tasks** describe themselves and their specific job be it fetching data, running analysis, detecting a change.
+
+### Airflow components
+
+![](https://airflow.apache.org/docs/apache-airflow/stable/_images/arch-diag-basic.png)
+
+General components of an Airflow installation:
+
+- A scheduler, handles triggering scheduled workflows, and submitting tasks to executors
+- An executor, handles running tasks, can be run inside the scheduler, or in production pushes tasks out to workers to run
+- A webserver, presents the UI
+- A folder of DAG files, to be read by the scheduler and executor
+- A metadata database, used by the scheduler, executor and webserver to store state
+
+### Task types
+
+A task may be one of a number of common types:
+
+- An [Operator](https://airflow.apache.org/docs/apache-airflow/stable/concepts/operators.html), a predefined template for a task that can quickly be configured 
+- A [Sensor](https://airflow.apache.org/docs/apache-airflow/stable/concepts/sensors.html) task, a task that waits for something to occur, once they succeed they allow downstream tasks to run
+- A [TaskFlow](https://airflow.apache.org/docs/apache-airflow/stable/concepts/taskflow.html), a pure python function that uses the `@task` decorator and takes care of extra DAG boilerplate
