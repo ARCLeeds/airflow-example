@@ -47,3 +47,23 @@ airflow standalone
 # shown on the terminal to login.
 # Enable the example_bash_operator dag in the home page
 ```
+
+## Extra: Configure VSCode Remote SSH to use Vagrant Box
+
+If you'd rather use VSCode for exploring and editing this repository you can configure the Remote SSH plugin for VSCode to use your running Vagrant box with the following steps.
+
+1. Install [VSCode Remote SSH](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh)
+
+2. Get vagrant SSH config details
+    ```
+    $ vagrant ssh-config
+    ```
+
+3. Add these details to your default `.ssh/config` file or another config file you wish to use
+
+4. Start up your vagrant VM
+    ```
+    $ vagrant up
+    ```
+
+5. Start a remote session via VSCode and select the name of the vagrant host
