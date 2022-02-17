@@ -2,3 +2,9 @@
 
 # vagrant
 .vagrant
+
+# python
+__pycache__
+
+# airflow
+logs*
