@@ -6,6 +6,8 @@
 
 This repository is intended to allow the user to duplicate the environment used for this walkthrough. It requires [Vagrant](https://www.vagrantup.com/) and a virtualisation provider such as [VirtualBox](https://www.virtualbox.org) and all commands below are for a bash-like shell.
 
+**This vagrantfile is set up to attempt to create a VM with 8GB of RAM, edit the Vagrantfile if your system doesn't have this much memory!**
+
 It is also possible to install Airflow through [`pip`](#Installing-with-pip).
 
 ```bash
@@ -47,6 +49,22 @@ airflow standalone
 # shown on the terminal to login.
 # Enable the example_bash_operator dag in the home page
 ```
+
+## Running the docker-compose example
+
+Now the pipeline defined in `dafs/pipeline.py` isn't really a good example of a pipeline. It'll run once and work but subsequent runs will fail, but it roughly gives you a look at how airflow works. Maybe you can get it behaving like it should?
+
+To spin it all up:
+
+```bash
+$ cd /home/vagrant/airflow
+
+# this will run and exit with 0 if successful
+$ docker-compose up airflow-init
+
+$ docker-compose up
+```
+This will spin up all services and you should then navigate to https://localhost:8080 and log in with `airflow` for both the username and password. You can then trigger the run by Unpausing the `etl_pipeline` in the DAGS menu, or clicking the play button to the right hand side of the `etl_pipeline` row.
 
 ## Extra: Configure VSCode Remote SSH to use Vagrant Box
 
